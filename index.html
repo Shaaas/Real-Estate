@@ -160,6 +160,26 @@
                 <button class="text-xs uppercase tracking-[0.4em] border border-white/20 px-10 py-5 hover:bg-white hover:text-black transition-all">Submit Entry</button>
             </form>
         </section>
+<section id="process" class="min-h-screen px-8 md:px-24 flex flex-col justify-center border-t border-white/5">
+    <h2 class="text-4xl md:text-6xl font-bold syne mb-20 uppercase tracking-tighter">The System</h2>
+    <div class="space-y-24 max-w-4xl relative border-l border-white/10 pl-8 md:pl-16">
+        <div class="process-step opacity-30 transition-opacity duration-700">
+            <span class="text-[10px] text-white/40 block mb-2 uppercase tracking-widest">Step 01</span>
+            <h3 class="text-2xl font-semibold syne mb-4">Market Intelligence</h3>
+            <p class="text-gray-400 text-sm leading-relaxed">Understanding the delta between current value and potential yield through deep-set data analysis.</p>
+        </div>
+        <div class="process-step opacity-30 transition-opacity duration-700">
+            <span class="text-[10px] text-white/40 block mb-2 uppercase tracking-widest">Step 02</span>
+            <h3 class="text-2xl font-semibold syne mb-4">Strategic Positioning</h3>
+            <p class="text-gray-400 text-sm leading-relaxed">Curating the property's narrative to attract tenants and buyers who prioritize quality and longevity.</p>
+        </div>
+        <div class="process-step opacity-30 transition-opacity duration-700">
+            <span class="text-[10px] text-white/40 block mb-2 uppercase tracking-widest">Step 03</span>
+            <h3 class="text-2xl font-semibold syne mb-4">Precision Management</h3>
+            <p class="text-gray-400 text-sm leading-relaxed">Discreet oversight and maintenance that treats property as a legacy asset, not just a line item.</p>
+        </div>
+    </div>
+</section>
 
         <!-- Footer -->
         <footer class="py-20 px-8 border-t border-white/5">
@@ -207,6 +227,19 @@
             scrollTrigger: { trigger: "#philosophy", start: "top 70%", end: "top 40%", scrub: 1 },
             opacity: 1, y: -20
         });
+   
+    document.querySelectorAll('.process-step').forEach((step) => {
+        gsap.to(step, {
+            scrollTrigger: {
+                trigger: step,
+                start: "top 60%",
+                end: "bottom 40%",
+                toggleActions: "play reverse play reverse",
+            },
+            opacity: 1,
+            duration: 0.5
+        });
+    });
     </script>
 
 </body>
