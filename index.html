@@ -9,7 +9,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@200;400;700&family=Syne:wght@400;700&display=swap');
-        body { background-color: #000; color: #fff; font-family: 'Inter', sans-serif; overflow-x: hidden; }
+        
+        body { background-color: #000; color: #fff; font-family: 'Inter', sans-serif; overflow-x: hidden; scroll-behavior: smooth; }
         .syne { font-family: 'Syne', sans-serif; }
 
         /* Subtle scanner nav */
@@ -23,174 +24,176 @@
 
         section { padding: 120px 0; }
         .hero-title { letter-spacing: -0.02em; line-height: 0.9; }
-        .section-title { font-size: 2.5rem; }
-        .subtle-text { color: #aaa; font-size: 0.7rem; letter-spacing: 0.2em; }
         input::placeholder { color: #888; text-transform: uppercase; }
-        button { transition: all 0.3s ease; }
+        
+        /* Modal Style */
+        #success-modal { pointer-events: none; opacity: 0; }
+        #success-modal.active { pointer-events: auto; opacity: 1; }
     </style>
 </head>
 <body>
 
-    <!-- Navigation -->
+    <div id="success-modal" class="fixed inset-0 z-[200] flex items-center justify-center backdrop-blur-xl bg-black/80 transition-opacity duration-500">
+        <div class="max-w-md text-center p-12 border border-white/10 bg-black">
+            <h3 class="text-3xl font-bold syne uppercase mb-4 tracking-tighter">Transmission Received</h3>
+            <p class="text-gray-400 text-sm mb-8 tracking-widest uppercase">Our archive is being updated. A curator will reach out shortly.</p>
+            <button onclick="closeModal()" class="text-[10px] border border-white/20 px-8 py-4 uppercase tracking-[0.3em] hover:bg-white hover:text-black transition-all">Close</button>
+        </div>
+    </div>
+
     <nav class="fixed top-0 w-full z-50 flex justify-between items-center px-8 py-6 backdrop-blur-sm bg-black/10 border-b border-white/5">
-        <div class="text-xl font-bold syne tracking-tighter cursor-pointer">V<span class="text-[8px] align-top opacity-50 ml-0.5">01</span></div>
+        <div class="text-xl font-bold syne tracking-tighter cursor-pointer" onclick="window.scrollTo(0,0)">V<span class="text-[8px] align-top opacity-50 ml-0.5">01</span></div>
         <div class="hidden md:flex space-x-10 text-[10px] uppercase tracking-[0.3em] font-light opacity-70">
             <a href="#philosophy">Philosophy</a>
             <a href="#services">Services</a>
-            <a href="#landlords">For Landlords</a>
+            <a href="#gallery">Archive</a>
+            <a href="#landlords">Landlords</a>
             <a href="#process">Process</a>
             <a href="#contact">Contact</a>
         </div>
     </nav>
 
-    <!-- Hero Background -->
+    <a href="#contact" id="floating-cta" class="fixed bottom-8 right-8 z-[100] flex items-center justify-center w-14 h-14 bg-white text-black rounded-full shadow-2xl transition-all duration-500 hover:scale-110 active:scale-95 group">
+        <span class="absolute right-16 bg-black text-white text-[9px] uppercase tracking-[0.3em] px-4 py-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none whitespace-nowrap border border-white/10">Inquire Now</span>
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+    </a>
+
     <div class="fixed inset-0 z-0">
-        <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&q=80&w=2000" 
-             id="hero-bg" class="w-full h-full object-cover opacity-20 grayscale">
+        <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&q=80&w=2000" id="hero-bg" class="w-full h-full object-cover opacity-20 grayscale">
     </div>
 
     <main class="relative z-10">
 
-        <!-- Hero Section -->
         <section class="h-screen flex flex-col items-center justify-center px-4">
             <h1 id="main-title" class="text-7xl md:text-9xl font-bold syne hero-title opacity-0">VOID</h1>
             <p id="hero-subtitle" class="text-[10px] uppercase tracking-[1.2em] text-gray-500 opacity-0 mt-6 ml-[1.2em]">Luxury Real Estate, Curated & Trusted</p>
         </section>
 
-        <!-- Philosophy -->
         <section id="philosophy" class="min-h-screen flex items-center px-8 md:px-24">
             <div class="max-w-3xl">
                 <span class="text-[10px] text-gray-600 uppercase tracking-widest block mb-8">/ The Approach</span>
                 <h2 id="pitch-text" class="text-3xl md:text-5xl font-light leading-snug opacity-0">
                     We specialize in <span class="text-white italic">architectural intent</span>.  
-                    VOID exists to curate spaces that respect the boundary between structure and environment, offering a discreet, reliable, and refined approach to property.
+                    VOID exists to curate spaces that respect the boundary between structure and environment.
                 </h2>
             </div>
         </section>
 
-        <!-- Services -->
         <section id="services" class="min-h-screen px-8 md:px-24 flex flex-col justify-center border-t border-white/5">
             <h2 class="text-4xl md:text-6xl font-bold syne mb-12 uppercase tracking-tighter">Services</h2>
             <div class="grid md:grid-cols-2 gap-16 max-w-4xl">
                 <div>
                     <h3 class="text-2xl font-semibold syne mb-4">Property Sales & Leasing</h3>
-                    <p class="text-gray-400 text-sm leading-relaxed">We help clients buy, sell, and lease properties with complete transparency and expert market guidance.</p>
+                    <p class="text-gray-400 text-sm">Expert market guidance with complete transparency.</p>
                 </div>
                 <div>
                     <h3 class="text-2xl font-semibold syne mb-4">Property Management</h3>
-                    <p class="text-gray-400 text-sm leading-relaxed">From tenant screening to maintenance coordination, we manage your property with care, maximizing returns.</p>
+                    <p class="text-gray-400 text-sm">Discreet, proactive maintenance and tenant care.</p>
                 </div>
                 <div>
                     <h3 class="text-2xl font-semibold syne mb-4">Landlord Advisory</h3>
-                    <p class="text-gray-400 text-sm leading-relaxed">Tailored strategies to increase property value, reduce vacancies, and optimize rental income.</p>
+                    <p class="text-gray-400 text-sm">Strategies to optimize rental income and asset value.</p>
                 </div>
                 <div>
-                    <h3 class="text-2xl font-semibold syne mb-4">Tenant Placement & Investment Consulting</h3>
-                    <p class="text-gray-400 text-sm leading-relaxed">We find reliable tenants and provide insights to investors seeking long-term, secure opportunities.</p>
+                    <h3 class="text-2xl font-semibold syne mb-4">Investment Consulting</h3>
+                    <p class="text-gray-400 text-sm">Insightful analysis for long-term secure opportunities.</p>
                 </div>
             </div>
         </section>
 
-        <!-- Landlord Pitch -->
-        <section id="landlords" class="min-h-screen px-8 md:px-24 flex flex-col justify-center bg-black/5 border-t border-white/5">
-            <h2 class="text-4xl md:text-6xl font-bold syne mb-12 uppercase tracking-tighter">For Landlords</h2>
-            <p class="text-gray-400 max-w-2xl mb-8 leading-relaxed">
-                We take the stress out of property ownership. Our disciplined approach ensures reliable tenants, timely rent collection, and proactive maintenance. Partner with VOID to protect and grow your investment.
-            </p>
-            <ul class="list-disc list-inside text-gray-400 max-w-2xl space-y-2">
-                <li>Tenant screening & background checks</li>
-                <li>Rent collection & financial reporting</li>
-                <li>Property maintenance & inspections</li>
-                <li>Vacancy reduction & market positioning</li>
+        <section id="gallery" class="min-h-screen px-8 md:px-24 border-t border-white/5">
+            <div class="flex justify-between items-end mb-12">
+                <div>
+                    <span class="text-[10px] text-gray-600 uppercase tracking-widest block mb-4">/ The Collection</span>
+                    <h2 class="text-4xl md:text-6xl font-bold syne uppercase tracking-tighter">Archive</h2>
+                </div>
+            </div>
+            <div class="grid md:grid-cols-3 gap-6">
+                <div class="group relative aspect-[4/5] overflow-hidden border border-white/10">
+                    <img src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&q=80&w=1000" class="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-110 transition-all duration-700">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black p-8 flex flex-col justify-end opacity-0 group-hover:opacity-100 transition-opacity">
+                        <h4 class="font-bold syne">Obsidian Pavilion</h4>
+                        <p class="text-[10px] text-gray-400 uppercase tracking-widest">Kyoto</p>
+                    </div>
+                </div>
+                <div class="group relative aspect-[4/5] overflow-hidden border border-white/10">
+                    <img src="https://images.unsplash.com/photo-1613490493576-7fde63acd811?auto=format&fit=crop&q=80&w=1000" class="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-110 transition-all duration-700">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black p-8 flex flex-col justify-end opacity-0 group-hover:opacity-100 transition-opacity">
+                        <h4 class="font-bold syne">Monolith Suite</h4>
+                        <p class="text-[10px] text-gray-400 uppercase tracking-widest">Reykjavík</p>
+                    </div>
+                </div>
+                <div class="group relative aspect-[4/5] overflow-hidden border border-white/10">
+                    <img src="https://images.unsplash.com/photo-1480074568708-e7b720bb3f09?auto=format&fit=crop&q=80&w=1000" class="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-110 transition-all duration-700">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black p-8 flex flex-col justify-end opacity-0 group-hover:opacity-100 transition-opacity">
+                        <h4 class="font-bold syne">Glass Horizon</h4>
+                        <p class="text-[10px] text-gray-400 uppercase tracking-widest">Zürich</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="landlords" class="min-h-screen px-8 md:px-24 flex flex-col justify-center border-t border-white/5">
+            <h2 class="text-4xl md:text-6xl font-bold syne mb-8 uppercase tracking-tighter">For Landlords</h2>
+            <p class="text-gray-400 max-w-2xl mb-8 leading-relaxed italic text-lg">"We manage assets, not just apartments."</p>
+            <ul class="list-none text-gray-400 max-w-2xl space-y-4 uppercase text-[10px] tracking-[0.2em]">
+                <li>/ Tenant vetting & longevity focus</li>
+                <li>/ Proactive asset maintenance</li>
+                <li>/ Market positioning for maximum yield</li>
             </ul>
         </section>
 
-        <!-- Process -->
         <section id="process" class="min-h-screen px-8 md:px-24 flex flex-col justify-center border-t border-white/5">
-            <h2 class="text-4xl md:text-6xl font-bold syne mb-12 uppercase tracking-tighter">Our Process</h2>
-            <div class="grid md:grid-cols-3 gap-12 max-w-5xl">
-                <div>
-                    <h3 class="text-xl font-semibold syne mb-2">Market Analysis</h3>
-                    <p class="text-gray-400 text-sm">Understanding your property's position in the current market to maximize value.</p>
+            <h2 class="text-4xl md:text-6xl font-bold syne mb-20 uppercase tracking-tighter">The System</h2>
+            <div class="space-y-24 max-w-4xl border-l border-white/10 pl-8 md:pl-16">
+                <div class="process-step opacity-30">
+                    <span class="text-[10px] text-white/40 block mb-2 uppercase tracking-widest">Step 01</span>
+                    <h3 class="text-2xl font-semibold syne mb-2">Market Intelligence</h3>
+                    <p class="text-gray-400 text-sm">Deep-set data analysis of current value vs potential yield.</p>
                 </div>
-                <div>
-                    <h3 class="text-xl font-semibold syne mb-2">Property Positioning</h3>
-                    <p class="text-gray-400 text-sm">Highlighting strengths and ensuring your property appeals to the right audience.</p>
+                <div class="process-step opacity-30">
+                    <span class="text-[10px] text-white/40 block mb-2 uppercase tracking-widest">Step 02</span>
+                    <h3 class="text-2xl font-semibold syne mb-2">Strategic Positioning</h3>
+                    <p class="text-gray-400 text-sm">Curating narratives that attract quality and longevity.</p>
                 </div>
-                <div>
-                    <h3 class="text-xl font-semibold syne mb-2">Tenant Vetting</h3>
-                    <p class="text-gray-400 text-sm">Screening tenants to ensure reliability and longevity.</p>
-                </div>
-                <div>
-                    <h3 class="text-xl font-semibold syne mb-2">Lease Structuring</h3>
-                    <p class="text-gray-400 text-sm">Drafting agreements that protect your investment and simplify management.</p>
-                </div>
-                <div>
-                    <h3 class="text-xl font-semibold syne mb-2">Ongoing Management</h3>
-                    <p class="text-gray-400 text-sm">Active oversight to maintain value, reduce stress, and optimize returns.</p>
+                <div class="process-step opacity-30">
+                    <span class="text-[10px] text-white/40 block mb-2 uppercase tracking-widest">Step 03</span>
+                    <h3 class="text-2xl font-semibold syne mb-2">Precision Management</h3>
+                    <p class="text-gray-400 text-sm">Discreet oversight treating property as a legacy asset.</p>
                 </div>
             </div>
         </section>
 
-        <!-- Founder Section -->
         <section id="founder" class="min-h-screen px-8 md:px-24 flex flex-col md:flex-row items-center justify-center border-t border-white/5 gap-12">
-            <img src="https://images.unsplash.com/photo-1603415526960-f7a9b4be0b4a?auto=format&fit=crop&q=80&w=400" 
-                 class="w-64 h-64 object-cover rounded-full border border-white/20">
+            <img src="https://images.unsplash.com/photo-1603415526960-f7a9b4be0b4a?auto=format&fit=crop&q=80&w=400" class="w-64 h-64 object-cover grayscale rounded-full border border-white/10">
             <div class="max-w-xl">
                 <h2 class="text-4xl font-bold syne mb-4">The Founder</h2>
-                <p class="text-gray-400 leading-relaxed">
-                    VOID was founded on the belief that property should be approached with patience, clarity, and respect for long-term value. We exist to simplify real estate for both owners and tenants through transparency, discretion, and disciplined execution.
-                </p>
+                <p class="text-gray-400 leading-relaxed">VOID was founded to simplify real estate through transparency, discretion, and disciplined execution.</p>
             </div>
         </section>
 
-        <!-- Contact / Inquiry -->
         <section id="contact" class="min-h-screen px-8 md:px-24 flex flex-col justify-center border-t border-white/5">
-            <h2 class="text-4xl md:text-6xl font-bold syne mb-12 uppercase tracking-tighter">Start a Conversation</h2>
-            <p class="text-gray-400 mb-8 max-w-2xl leading-relaxed">Every property begins with a conversation. Fill out the form below to get in touch.</p>
-            <form class="space-y-12 max-w-2xl">
+            <h2 class="text-4xl md:text-6xl font-bold syne mb-12 uppercase tracking-tighter">Inquiry</h2>
+            <form id="contact-form" onsubmit="handleSubmit(event)" class="space-y-12 max-w-2xl">
                 <div class="border-b border-white/10 pb-4">
                     <label class="text-[9px] text-gray-500 uppercase tracking-widest mb-2 block">Identity</label>
-                    <input type="text" placeholder="NAME" class="bg-transparent w-full outline-none text-sm tracking-widest uppercase">
+                    <input type="text" required placeholder="NAME" class="bg-transparent w-full outline-none text-sm tracking-widest uppercase">
                 </div>
                 <div class="border-b border-white/10 pb-4">
                     <label class="text-[9px] text-gray-500 uppercase tracking-widest mb-2 block">Coordinates</label>
-                    <input type="text" placeholder="PROPERTY ADDRESS" class="bg-transparent w-full outline-none text-sm tracking-widest uppercase">
+                    <input type="text" required placeholder="PROPERTY ADDRESS / EMAIL" class="bg-transparent w-full outline-none text-sm tracking-widest uppercase">
                 </div>
-                <button class="text-xs uppercase tracking-[0.4em] border border-white/20 px-10 py-5 hover:bg-white hover:text-black transition-all">Submit Entry</button>
+                <button type="submit" class="text-xs uppercase tracking-[0.4em] border border-white/20 px-10 py-5 hover:bg-white hover:text-black transition-all">Submit Entry</button>
             </form>
         </section>
-<section id="process" class="min-h-screen px-8 md:px-24 flex flex-col justify-center border-t border-white/5">
-    <h2 class="text-4xl md:text-6xl font-bold syne mb-20 uppercase tracking-tighter">The System</h2>
-    <div class="space-y-24 max-w-4xl relative border-l border-white/10 pl-8 md:pl-16">
-        <div class="process-step opacity-30 transition-opacity duration-700">
-            <span class="text-[10px] text-white/40 block mb-2 uppercase tracking-widest">Step 01</span>
-            <h3 class="text-2xl font-semibold syne mb-4">Market Intelligence</h3>
-            <p class="text-gray-400 text-sm leading-relaxed">Understanding the delta between current value and potential yield through deep-set data analysis.</p>
-        </div>
-        <div class="process-step opacity-30 transition-opacity duration-700">
-            <span class="text-[10px] text-white/40 block mb-2 uppercase tracking-widest">Step 02</span>
-            <h3 class="text-2xl font-semibold syne mb-4">Strategic Positioning</h3>
-            <p class="text-gray-400 text-sm leading-relaxed">Curating the property's narrative to attract tenants and buyers who prioritize quality and longevity.</p>
-        </div>
-        <div class="process-step opacity-30 transition-opacity duration-700">
-            <span class="text-[10px] text-white/40 block mb-2 uppercase tracking-widest">Step 03</span>
-            <h3 class="text-2xl font-semibold syne mb-4">Precision Management</h3>
-            <p class="text-gray-400 text-sm leading-relaxed">Discreet oversight and maintenance that treats property as a legacy asset, not just a line item.</p>
-        </div>
-    </div>
-</section>
 
-        <!-- Footer -->
-        <footer class="py-20 px-8 border-t border-white/5">
-            <div class="flex flex-col md:flex-row justify-between items-center text-[9px] text-gray-600 uppercase tracking-widest gap-6">
-                <div>VOID REAL ESTATE © 2026</div>
-                <div class="flex space-x-8">
-                    <a href="#" class="hover:text-white transition-colors">Instagram</a>
-                    <a href="#" class="hover:text-white transition-colors">LinkedIn</a>
-                </div>
-                <div>LICENSED REAL ESTATE BROKERAGE</div>
+        <footer class="py-20 px-8 border-t border-white/5 text-[9px] text-gray-600 uppercase tracking-widest flex flex-col md:flex-row justify-between items-center gap-6">
+            <div>VOID REAL ESTATE © 2026</div>
+            <div class="flex space-x-8">
+                <a href="#" class="hover:text-white transition-colors">Instagram</a>
+                <a href="#" class="hover:text-white transition-colors">LinkedIn</a>
             </div>
+            <div>LICENSED REAL ESTATE BROKERAGE</div>
         </footer>
 
     </main>
@@ -198,49 +201,39 @@
     <script>
         gsap.registerPlugin(ScrollTrigger);
 
-        // Typewriter effect
+        // Intro
         const text = "VOID";
         const titleEl = document.getElementById("main-title");
         let i = 0;
         function type() {
-            if (i < text.length) {
-                titleEl.innerHTML += text.charAt(i);
-                i++;
-                setTimeout(type, 100);
-            }
+            if (i < text.length) { titleEl.innerHTML += text.charAt(i); i++; setTimeout(type, 150); }
             titleEl.style.opacity = "1";
         }
-        window.onload = () => {
-            type();
-            gsap.to("#hero-subtitle", { opacity: 0.5, y: -10, delay: 0.8 });
-        };
+        window.onload = () => { type(); gsap.to("#hero-subtitle", { opacity: 0.5, y: -10, delay: 1 }); };
 
-        // Subtle hero background zoom
-        gsap.to("#hero-bg", {
-            scrollTrigger: { trigger: "body", start: "top top", end: "bottom bottom", scrub: true },
-            scale: 1.4,
-            opacity: 0.05
+        // Parallax
+        gsap.to("#hero-bg", { scrollTrigger: { trigger: "body", start: "top top", end: "bottom bottom", scrub: true }, scale: 1.2, opacity: 0.05 });
+
+        // Sections Reveal
+        gsap.to("#pitch-text", { scrollTrigger: { trigger: "#philosophy", start: "top 70%", end: "top 40%", scrub: 1 }, opacity: 1, y: -20 });
+
+        // System Steps Reveal
+        document.querySelectorAll('.process-step').forEach((step) => {
+            gsap.to(step, { scrollTrigger: { trigger: step, start: "top 70%", toggleActions: "play reverse play reverse" }, opacity: 1, duration: 0.5 });
         });
 
-        // Fade in philosophy text
-        gsap.to("#pitch-text", {
-            scrollTrigger: { trigger: "#philosophy", start: "top 70%", end: "top 40%", scrub: 1 },
-            opacity: 1, y: -20
-        });
-   
-    document.querySelectorAll('.process-step').forEach((step) => {
-        gsap.to(step, {
-            scrollTrigger: {
-                trigger: step,
-                start: "top 60%",
-                end: "bottom 40%",
-                toggleActions: "play reverse play reverse",
-            },
-            opacity: 1,
-            duration: 0.5
-        });
-    });
+        // Floating CTA Visibility
+        gsap.from("#floating-cta", { scrollTrigger: { trigger: "#philosophy", start: "top 20%", toggleActions: "play none none reverse" }, scale: 0, opacity: 0, duration: 0.5 });
+
+        // Form Logic
+        function handleSubmit(e) {
+            e.preventDefault();
+            document.getElementById('success-modal').classList.add('active');
+        }
+        function closeModal() {
+            document.getElementById('success-modal').classList.remove('active');
+            document.getElementById('contact-form').reset();
+        }
     </script>
-
 </body>
 </html>
