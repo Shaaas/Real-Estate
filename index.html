@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VOID REAL ESTATE | The Archive</title>
+    <title>VOID REAL ESTATE | Curating the Exceptional</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
@@ -11,8 +11,8 @@
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@200;400;700&family=Syne:wght@400;700&display=swap');
         body { background-color: #000; color: #fff; font-family: 'Inter', sans-serif; overflow-x: hidden; }
         .syne { font-family: 'Syne', sans-serif; }
-        
-        /* Subtle Scanner Nav */
+
+        /* Subtle scanner nav */
         nav a { position: relative; overflow: hidden; padding-bottom: 4px; }
         nav a::after {
             content: ""; position: absolute; bottom: 0; left: 0; width: 100%; height: 1px;
@@ -23,20 +23,27 @@
 
         section { padding: 120px 0; }
         .hero-title { letter-spacing: -0.02em; line-height: 0.9; }
+        .section-title { font-size: 2.5rem; }
+        .subtle-text { color: #aaa; font-size: 0.7rem; letter-spacing: 0.2em; }
+        input::placeholder { color: #888; text-transform: uppercase; }
+        button { transition: all 0.3s ease; }
     </style>
 </head>
 <body>
 
+    <!-- Navigation -->
     <nav class="fixed top-0 w-full z-50 flex justify-between items-center px-8 py-6 backdrop-blur-sm bg-black/10 border-b border-white/5">
         <div class="text-xl font-bold syne tracking-tighter cursor-pointer">V<span class="text-[8px] align-top opacity-50 ml-0.5">01</span></div>
         <div class="hidden md:flex space-x-10 text-[10px] uppercase tracking-[0.3em] font-light opacity-70">
             <a href="#philosophy">Philosophy</a>
-            <a href="#portal">Portal</a>
-            <a href="#list">List</a>
+            <a href="#services">Services</a>
+            <a href="#landlords">For Landlords</a>
+            <a href="#process">Process</a>
             <a href="#contact">Contact</a>
         </div>
     </nav>
 
+    <!-- Hero Background -->
     <div class="fixed inset-0 z-0">
         <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&q=80&w=2000" 
              id="hero-bg" class="w-full h-full object-cover opacity-20 grayscale">
@@ -44,57 +51,120 @@
 
     <main class="relative z-10">
 
+        <!-- Hero Section -->
         <section class="h-screen flex flex-col items-center justify-center px-4">
-            <h1 id="main-title" class="text-7xl md:text-9xl font-bold syne hero-title opacity-0"></h1>
-            <p id="sub-title" class="text-[10px] uppercase tracking-[1.2em] text-gray-500 opacity-0 mt-6 ml-[1.2em]">Curating the Exceptional</p>
+            <h1 id="main-title" class="text-7xl md:text-9xl font-bold syne hero-title opacity-0">VOID</h1>
+            <p id="hero-subtitle" class="text-[10px] uppercase tracking-[1.2em] text-gray-500 opacity-0 mt-6 ml-[1.2em]">Luxury Real Estate, Curated & Trusted</p>
         </section>
 
+        <!-- Philosophy -->
         <section id="philosophy" class="min-h-screen flex items-center px-8 md:px-24">
             <div class="max-w-3xl">
                 <span class="text-[10px] text-gray-600 uppercase tracking-widest block mb-8">/ The Approach</span>
                 <h2 id="pitch-text" class="text-3xl md:text-5xl font-light leading-snug opacity-0">
-                    We specialize in <span class="text-white italic">architectural intent.</span> 
-                    Our archive is a collection of spaces that redefine the boundary between structure and environment.
+                    We specialize in <span class="text-white italic">architectural intent</span>.  
+                    VOID exists to curate spaces that respect the boundary between structure and environment, offering a discreet, reliable, and refined approach to property.
                 </h2>
             </div>
         </section>
 
-        <section id="portal" class="bg-white text-black min-h-screen px-8 md:px-24 flex items-center">
-            <div class="w-full grid md:grid-cols-2 gap-20 items-center">
+        <!-- Services -->
+        <section id="services" class="min-h-screen px-8 md:px-24 flex flex-col justify-center border-t border-white/5">
+            <h2 class="text-4xl md:text-6xl font-bold syne mb-12 uppercase tracking-tighter">Services</h2>
+            <div class="grid md:grid-cols-2 gap-16 max-w-4xl">
                 <div>
-                    <h2 class="text-5xl md:text-7xl font-bold syne uppercase mb-6 tracking-tighter">The Portal</h2>
-                    <p class="text-sm text-gray-500 max-w-sm mb-10 leading-relaxed uppercase tracking-wider">Direct real-time interface with the global luxury market database.</p>
-                    <div class="flex border-b border-black pb-2">
-                        <input type="text" placeholder="Location..." class="bg-transparent w-full outline-none text-sm uppercase tracking-widest">
-                        <button class="text-[10px] font-bold uppercase tracking-widest hover:opacity-50">Search</button>
-                    </div>
+                    <h3 class="text-2xl font-semibold syne mb-4">Property Sales & Leasing</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">We help clients buy, sell, and lease properties with complete transparency and expert market guidance.</p>
                 </div>
-                <div class="aspect-[4/3] bg-gray-50 border border-gray-100 flex items-center justify-center text-[10px] text-gray-300 uppercase tracking-[0.4em]">
-                    [ IDX Feed Active ]
+                <div>
+                    <h3 class="text-2xl font-semibold syne mb-4">Property Management</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">From tenant screening to maintenance coordination, we manage your property with care, maximizing returns.</p>
+                </div>
+                <div>
+                    <h3 class="text-2xl font-semibold syne mb-4">Landlord Advisory</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">Tailored strategies to increase property value, reduce vacancies, and optimize rental income.</p>
+                </div>
+                <div>
+                    <h3 class="text-2xl font-semibold syne mb-4">Tenant Placement & Investment Consulting</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">We find reliable tenants and provide insights to investors seeking long-term, secure opportunities.</p>
                 </div>
             </div>
         </section>
 
-        <section id="list" class="min-h-screen px-8 md:px-24 flex flex-col justify-center border-t border-white/5">
-            <div class="max-w-2xl">
-                <h2 class="text-4xl md:text-6xl font-bold syne mb-12 uppercase tracking-tighter">Inquiry</h2>
-                <form class="space-y-12">
-                    <div class="border-b border-white/10 pb-4">
-                        <label class="text-[9px] text-gray-500 uppercase tracking-widest mb-2 block">Identity</label>
-                        <input type="text" placeholder="NAME" class="bg-transparent w-full outline-none text-sm tracking-widest uppercase">
-                    </div>
-                    <div class="border-b border-white/10 pb-4">
-                        <label class="text-[9px] text-gray-500 uppercase tracking-widest mb-2 block">Coordinates</label>
-                        <input type="text" placeholder="PROPERTY ADDRESS" class="bg-transparent w-full outline-none text-sm tracking-widest uppercase">
-                    </div>
-                    <button class="text-xs uppercase tracking-[0.4em] border border-white/20 px-10 py-5 hover:bg-white hover:text-black transition-all">Submit Entry</button>
-                </form>
+        <!-- Landlord Pitch -->
+        <section id="landlords" class="min-h-screen px-8 md:px-24 flex flex-col justify-center bg-black/5 border-t border-white/5">
+            <h2 class="text-4xl md:text-6xl font-bold syne mb-12 uppercase tracking-tighter">For Landlords</h2>
+            <p class="text-gray-400 max-w-2xl mb-8 leading-relaxed">
+                We take the stress out of property ownership. Our disciplined approach ensures reliable tenants, timely rent collection, and proactive maintenance. Partner with VOID to protect and grow your investment.
+            </p>
+            <ul class="list-disc list-inside text-gray-400 max-w-2xl space-y-2">
+                <li>Tenant screening & background checks</li>
+                <li>Rent collection & financial reporting</li>
+                <li>Property maintenance & inspections</li>
+                <li>Vacancy reduction & market positioning</li>
+            </ul>
+        </section>
+
+        <!-- Process -->
+        <section id="process" class="min-h-screen px-8 md:px-24 flex flex-col justify-center border-t border-white/5">
+            <h2 class="text-4xl md:text-6xl font-bold syne mb-12 uppercase tracking-tighter">Our Process</h2>
+            <div class="grid md:grid-cols-3 gap-12 max-w-5xl">
+                <div>
+                    <h3 class="text-xl font-semibold syne mb-2">Market Analysis</h3>
+                    <p class="text-gray-400 text-sm">Understanding your property's position in the current market to maximize value.</p>
+                </div>
+                <div>
+                    <h3 class="text-xl font-semibold syne mb-2">Property Positioning</h3>
+                    <p class="text-gray-400 text-sm">Highlighting strengths and ensuring your property appeals to the right audience.</p>
+                </div>
+                <div>
+                    <h3 class="text-xl font-semibold syne mb-2">Tenant Vetting</h3>
+                    <p class="text-gray-400 text-sm">Screening tenants to ensure reliability and longevity.</p>
+                </div>
+                <div>
+                    <h3 class="text-xl font-semibold syne mb-2">Lease Structuring</h3>
+                    <p class="text-gray-400 text-sm">Drafting agreements that protect your investment and simplify management.</p>
+                </div>
+                <div>
+                    <h3 class="text-xl font-semibold syne mb-2">Ongoing Management</h3>
+                    <p class="text-gray-400 text-sm">Active oversight to maintain value, reduce stress, and optimize returns.</p>
+                </div>
             </div>
         </section>
 
+        <!-- Founder Section -->
+        <section id="founder" class="min-h-screen px-8 md:px-24 flex flex-col md:flex-row items-center justify-center border-t border-white/5 gap-12">
+            <img src="https://images.unsplash.com/photo-1603415526960-f7a9b4be0b4a?auto=format&fit=crop&q=80&w=400" 
+                 class="w-64 h-64 object-cover rounded-full border border-white/20">
+            <div class="max-w-xl">
+                <h2 class="text-4xl font-bold syne mb-4">The Founder</h2>
+                <p class="text-gray-400 leading-relaxed">
+                    VOID was founded on the belief that property should be approached with patience, clarity, and respect for long-term value. We exist to simplify real estate for both owners and tenants through transparency, discretion, and disciplined execution.
+                </p>
+            </div>
+        </section>
+
+        <!-- Contact / Inquiry -->
+        <section id="contact" class="min-h-screen px-8 md:px-24 flex flex-col justify-center border-t border-white/5">
+            <h2 class="text-4xl md:text-6xl font-bold syne mb-12 uppercase tracking-tighter">Start a Conversation</h2>
+            <p class="text-gray-400 mb-8 max-w-2xl leading-relaxed">Every property begins with a conversation. Fill out the form below to get in touch.</p>
+            <form class="space-y-12 max-w-2xl">
+                <div class="border-b border-white/10 pb-4">
+                    <label class="text-[9px] text-gray-500 uppercase tracking-widest mb-2 block">Identity</label>
+                    <input type="text" placeholder="NAME" class="bg-transparent w-full outline-none text-sm tracking-widest uppercase">
+                </div>
+                <div class="border-b border-white/10 pb-4">
+                    <label class="text-[9px] text-gray-500 uppercase tracking-widest mb-2 block">Coordinates</label>
+                    <input type="text" placeholder="PROPERTY ADDRESS" class="bg-transparent w-full outline-none text-sm tracking-widest uppercase">
+                </div>
+                <button class="text-xs uppercase tracking-[0.4em] border border-white/20 px-10 py-5 hover:bg-white hover:text-black transition-all">Submit Entry</button>
+            </form>
+        </section>
+
+        <!-- Footer -->
         <footer class="py-20 px-8 border-t border-white/5">
             <div class="flex flex-col md:flex-row justify-between items-center text-[9px] text-gray-600 uppercase tracking-widest gap-6">
-                <div>VOID COLLECTIVE © 2026</div>
+                <div>VOID REAL ESTATE © 2026</div>
                 <div class="flex space-x-8">
                     <a href="#" class="hover:text-white transition-colors">Instagram</a>
                     <a href="#" class="hover:text-white transition-colors">LinkedIn</a>
@@ -108,7 +178,7 @@
     <script>
         gsap.registerPlugin(ScrollTrigger);
 
-        // Typewriter: A bit faster now
+        // Typewriter effect
         const text = "VOID";
         const titleEl = document.getElementById("main-title");
         let i = 0;
@@ -122,21 +192,22 @@
         }
         window.onload = () => {
             type();
-            gsap.to("#sub-title", { opacity: 0.5, y: -10, delay: 0.8 });
+            gsap.to("#hero-subtitle", { opacity: 0.5, y: -10, delay: 0.8 });
         };
 
-        // Subtle Zoom
+        // Subtle hero background zoom
         gsap.to("#hero-bg", {
             scrollTrigger: { trigger: "body", start: "top top", end: "bottom bottom", scrub: true },
             scale: 1.4,
             opacity: 0.05
         });
 
-        // Soft Fade-in for Content
+        // Fade in philosophy text
         gsap.to("#pitch-text", {
             scrollTrigger: { trigger: "#philosophy", start: "top 70%", end: "top 40%", scrub: 1 },
             opacity: 1, y: -20
         });
     </script>
+
 </body>
 </html>
