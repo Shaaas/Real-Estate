@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VOID | Real Estate Archive</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@200;400;900&family=Syne:wght@400;800&display=swap');
+
+        body { 
+            background-color: #000; 
+            color: #fff; 
+            overflow-x: hidden; 
+            font-family: 'Inter', sans-serif; 
+        }
+
+        /* Scanner Hover Effect for Nav */
+        nav a {
+            position: relative;
+            overflow: hidden;
+            display: inline-block;
+            transition: color 0.3s;
+        }
+
+        nav a::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: #fff;
+            box-shadow: 0 0 10px #fff, 0 0 20px #fff;
+            transform: translateY(-20px);
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        nav a:hover::after {
+            transform: translateY(40px);
+        }
+
+        /* Custom Cursor Logic */
+        #custom-cursor {
+            display: none; /* Hidden by default for mobile */
+            pointer-events: none;
+            mix-blend-difference: exclusion;
+        }
+
+        @media (pointer: fine) {
+            body, a, button { cursor: none !important; }
+            #custom-cursor { display: flex; }
+        }
+
+        .letter-spacing-wide { letter-spacing: 0.8rem; }
+        .syne { font-family: 'Syne', sans-serif; }
+    </style>
+</head>
+<body>
+
+    <div id="custom-cursor" class="fixed top-0 left-0 w-10 h-10 border border-white rounded-full z-[9999] flex items-center justify-center">
+        <div class="w-1 h-1 bg-white rounded-full"></div>
+    </div>
+
+    <nav class="fixed top-0 w-full z-50 flex justify-between items-center px-8 py-6 backdrop-blur-md bg-black/20 border-b border-white/5">
+        <div class="text-2xl font-bold tracking-tighter syne">
+            V<span class="text-[10px] align-top text-gray-500 ml-1">01</span>
+        </div>
+        
+        <div class="hidden md:flex space-x-12 text-[10px] uppercase tracking-[0.4em] font-light">
+            <a href="#">The Archive</a>
+            <a href="#">Philosophy</a>
+            <a href="#">Inquire</a>
+        </div>
+
+        <div class="md:hidden flex flex-col space-y-1">
+            <div class="w-6 h-px bg-white"></div>
+            <div class="w-4 h-px bg-white self-end"></div>
+        </div>
+    </nav>
+
+    <div class="fixed inset-0 z-0">
+        <img src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&q=80&w=2000" 
+             id="hero-bg" class="w-full h-full object-cover opacity-50 grayscale scale-110">
+    </div>
+
+    <main class="relative z-10">
+        
+        <section class="h-screen flex flex-col items-center justify-center text-center">
+            <h1 id="main-title" class="text-6xl md:text-[10rem] font-black uppercase syne letter-spacing-wide opacity-0"></h1>
+            <p id="sub-title" class="text-xs uppercase tracking-[1em] text-gray-500 opacity-0 mt-4">Out of this world living</p>
+        </section>
+
+        <section class="h-screen flex items-center justify-center px-8">
+            <div class="max-w-5xl">
+                <h2 id="pitch-text" class="text-4xl md:text-7xl font-light leading-tight syne opacity-0">
+                    We don't sell houses. <br/>
+                    <span class="text-gray-500 italic">We unlock dimensions.</span>
+                </h2>
+            </div>
+        </section>
+
+        <section class="h-[50vh] flex flex-col items-center justify-center">
+            <button class="group relative px-16 py-6 border border-white/30 overflow-hidden">
+                <span class="relative z-10 text-xs uppercase tracking-widest group-hover:text-black transition-colors duration-500">Enter The Void</span>
+                <div class="absolute inset-0 bg-white translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-in-out"></div>
+            </button>
+        </section>
+
+    </main>
+
+    <script>
+        gsap.registerPlugin(ScrollTrigger);
+
+        // 1. Terminal Typewriter Effect
+        const brandName = "VOID";
+        const titleEl = document.getElementById("main-title");
+        let charIndex = 0;
+
+        function typeEffect() {
+            if (charIndex < brandName.length) {
+                titleEl.innerHTML += brandName.charAt(charIndex);
+                charIndex++;
+                setTimeout(typeEffect, 200);
+            } else {
+                titleEl.innerHTML += '<span class="animate-pulse">_</span>';
+            }
+        }
+
+        window.addEventListener('load', () => {
+            titleEl.style.opacity = "1";
+            typeEffect();
+            gsap.to("#sub-title", { opacity: 1, y: -20, delay: 1.5, duration: 1.5 });
+        });
+
+        // 2. Custom Cursor Inertia
+        const cursor = document.getElementById("custom-cursor");
+        const xTo = gsap.quickTo(cursor, "x", {duration: 0.5, ease: "power3"}),
+              yTo = gsap.quickTo(cursor, "y", {duration: 0.5, ease: "power3"});
+
+        window.addEventListener("mousemove", e => {
+            xTo(e.clientX - 20);
+            yTo(e.clientY - 20);
+        });
+
+        // Cursor Grow on Hover
+        document.querySelectorAll('a, button').forEach(el => {
+            el.addEventListener("mouseenter", () => gsap.to(cursor, { scale: 1.5, backgroundColor: "rgba(255,255,255,0.1)" }));
+            el.addEventListener("mouseleave", () => gsap.to(cursor, { scale: 1, backgroundColor: "transparent" }));
+        });
+
+        // 3. Cinematic Scroll Zoom
+        gsap.to("#hero-bg", {
+            scrollTrigger: {
+                trigger: "body",
+                start: "top top",
+                end: "bottom bottom",
+                scrub: 1
+            },
+            scale: 2.5,
+            opacity: 0.1,
+            filter: "blur(15px)"
+        });
+
+        // 4. Content Reveals
+        gsap.to("#pitch-text", {
+            scrollTrigger: {
+                trigger: "#pitch-text",
+                start: "top 80%",
+                scrub: 1
+            },
+            opacity: 1,
+            y: -50,
+            skewX: -5
+        });
+    </script>
+</body>
+</html>
